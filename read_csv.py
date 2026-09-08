@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 CSV Reader Script
-Reads all CSV files from the csv/ directory and displays them in the console.
+Reads deepak.csv from the root directory and displays it in the console.
 """
 
 import os
@@ -79,37 +79,29 @@ def display_csv_data(file_path, headers, rows):
 
 def main():
     """
-    Main function to read and display all CSV files from the csv/ directory.
+    Main function to read and display deepak.csv from the root directory.
     """
     print("\n" + "🚀 CSV READER SCRIPT STARTED" + "\n")
     print("="*80)
     
-    # Get the csv directory path
+    # Get the script directory path
     script_dir = Path(__file__).parent
-    csv_dir = script_dir / 'csv'
+    deepak_csv = script_dir / 'deepak.csv'
     
-    # Check if csv directory exists
-    if not csv_dir.exists():
-        print(f"❌ Error: CSV directory not found at {csv_dir}")
+    # Check if deepak.csv exists
+    if not deepak_csv.exists():
+        print(f"❌ Error: deepak.csv not found in root directory")
+        print("="*80)
         sys.exit(1)
     
-    # Find all CSV files
-    csv_files = list(csv_dir.glob('*.csv'))
-    
-    if not csv_files:
-        print(f"⚠️  No CSV files found in {csv_dir}")
-        print("="*80)
-        return
-    
-    print(f"✅ Found {len(csv_files)} CSV file(s) in the csv/ directory")
+    print(f"✅ Found deepak.csv in root directory")
     print("="*80)
     
-    # Process each CSV file
-    for csv_file in sorted(csv_files):
-        result = read_csv_file(csv_file)
-        if result:
-            headers, rows = result
-            display_csv_data(csv_file, headers, rows)
+    # Read and display the CSV file
+    result = read_csv_file(deepak_csv)
+    if result:
+        headers, rows = result
+        display_csv_data(deepak_csv, headers, rows)
     
     print("\n" + "✅ CSV READER SCRIPT COMPLETED" + "\n")
 
