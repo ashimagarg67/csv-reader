@@ -1,17 +1,16 @@
 # CSV Reader 📊
 
-An automated CSV reader project that triggers Python scripts via GitHub Actions whenever CSV files are committed.
+An automated CSV reader project that triggers a Python script via GitHub Actions whenever `deepak.csv` is committed.
 
 ## 🎯 Overview
 
-This project automatically reads and displays CSV data in the console whenever changes are made to CSV files in the repository. It uses GitHub Actions to detect commits (via direct push or Pull Request) and runs a Python script to process the data.
+This project automatically reads and displays CSV data in the console whenever changes are made to `deepak.csv` in the repository. It uses GitHub Actions to detect commits (via direct push or Pull Request) and runs a Python script to process the data.
 
 ## 📁 Project Structure
 
 ```
 csv-reader/
-├── csv/                          # Directory containing CSV files
-│   └── sample_data.csv          # Sample CSV data file
+├── deepak.csv                   # CSV data file (monitored for changes)
 ├── read_csv.py                  # Python script to read and display CSV data
 ├── .github/
 │   └── workflows/
@@ -21,24 +20,25 @@ csv-reader/
 
 ## ⚙️ How It Works
 
-1. **Commit CSV Changes**: When you commit changes to any file in the `csv/` folder (either directly or via a Pull Request)
+1. **Commit Changes**: When you commit changes to `deepak.csv` (either directly or via a Pull Request)
 2. **Automatic Trigger**: GitHub Actions automatically detects the change
 3. **Script Execution**: The workflow sets up Python and runs `read_csv.py`
 4. **Console Output**: CSV data is displayed in the GitHub Actions console logs
 
 ## 🚀 Usage
 
-### Adding New CSV Files
+### Updating deepak.csv
 
-1. Add your CSV file to the `csv/` directory:
+1. Edit `deepak.csv` with your data:
    ```bash
-   cp your_data.csv csv/
+   # Add a new row
+   echo "6,New Person,25,City,Role" >> deepak.csv
    ```
 
 2. Commit and push the changes:
    ```bash
-   git add csv/your_data.csv
-   git commit -m "Add new CSV data file"
+   git add deepak.csv
+   git commit -m "Update deepak.csv"
    git push
    ```
 
@@ -46,7 +46,7 @@ csv-reader/
 
 ### Running Locally
 
-You can also run the script locally:
+You can also run the script locally to test:
 
 ```bash
 python read_csv.py
@@ -62,7 +62,7 @@ python read_csv.py
 The GitHub Actions workflow (`csv-reader.yml`) is configured to:
 
 - **Trigger on**: Push and Pull Request events
-- **Filter**: Only when files in `csv/` directory change
+- **Filter**: Only when `deepak.csv` changes
 - **Run on**: Ubuntu latest
 - **Steps**:
   1. Checkout repository
@@ -72,16 +72,17 @@ The GitHub Actions workflow (`csv-reader.yml`) is configured to:
 
 ## 📊 Sample Data
 
-The repository includes `sample_data.csv` with employee data for testing purposes.
+The repository includes `deepak.csv` with sample employee data:
+- id, name, age, city, role
 
 ## 🎨 Features
 
-- ✅ Automatic execution on CSV file commits
+- ✅ Automatic execution on `deepak.csv` commits
 - ✅ Formatted console output with tables
-- ✅ Reads multiple CSV files
 - ✅ Error handling
 - ✅ Row count statistics
 - ✅ Works with both push and pull requests
+- ✅ Lightweight - no external dependencies
 
 ## 🔍 Viewing Results
 
@@ -106,16 +107,22 @@ Edit `.github/workflows/csv-reader.yml` to modify:
 - Additional processing steps
 - Notification settings
 
+### Monitor Different Files
+
+To monitor a different CSV file, update:
+1. The `paths` section in `.github/workflows/csv-reader.yml`
+2. The file path in `read_csv.py`
+
 ## 📝 Notes
 
-- The workflow only triggers when CSV files are modified, not on other file changes
-- All CSV files in the `csv/` directory will be processed
+- The workflow **only** triggers when `deepak.csv` is modified
+- Changes to other files (like `README.md` or `read_csv.py`) won't trigger the workflow
 - Console output is available in GitHub Actions logs
 
 ## 🤝 Contributing
 
 1. Create a new branch
-2. Add or modify CSV files in the `csv/` directory
+2. Modify `deepak.csv`
 3. Create a Pull Request
 4. The workflow will run automatically on the PR
 
