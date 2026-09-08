@@ -1,0 +1,47 @@
+name: CSV Reader Workflow
+
+# Trigger this workflow when:
+# 1. There's a push to any branch
+# 2. There's a pull request to any branch
+# AND the changes include files in the csv/ directory
+on:
+  push:
+    paths:
+      - 'csv/**'
+  pull_request:
+    paths:
+      - 'csv/**'
+
+jobs:
+  read-csv:
+    name: Read and Display CSV Data
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      # Step 3: Display Python version
+      - name: Display Python Version
+        run: |
+          python --version
+          echo "Python environment is ready!"
+      
+      # Step 4: Run the CSV reader script
+      - name: Run CSV Reader Script
+        run: |
+          echo "🔍 Starting CSV Reader..."
+          python read_csv.py
+      
+      # Step 5: Show workflow completion
+      - name: Workflow Complete
+        run: |
+          echo "✅ CSV data has been displayed successfully!"
+          echo "📝 Check the logs above to see the CSV contents."
